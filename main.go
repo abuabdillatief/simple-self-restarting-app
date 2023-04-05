@@ -9,6 +9,10 @@ import (
 var restartNotifier = make(chan string)
 
 func main() {
+	HandlePriceWithInt()
+	HandlePriceWithFloat()
+	fmt.Println("---")
+	
 	SelfRestartApp()
 }
 
