@@ -31,6 +31,7 @@ func RecoverFunc() {
 	if err != nil {
 		fmt.Println("\nPanic occured. Restarting app..")
 		go func() {
+			defer func() { restartNotifier <- "App restarted" }()
 			finish := time.Now().Add(500 * time.Millisecond)
 			for {
 				if time.Now().After(finish) {
@@ -44,10 +45,6 @@ func RecoverFunc() {
 		time.Sleep(500 * time.Millisecond)
 		println("..........................")
 		println()
-		restartNotifier <- "App restarted"
 		SelfRestartApp()
 	}
 }
-
-
-
